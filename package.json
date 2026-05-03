@@ -1,0 +1,10 @@
+{
+  "name": "house-of-leap-pm",
+  "version": "1.0.0",
+  "description": "Project management system for House of Leap",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "UNLICENSED"
+}
