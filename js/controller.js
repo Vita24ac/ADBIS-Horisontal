@@ -275,6 +275,20 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    // Bell — send reminder
+    const bellBtn = e.target.closest('[data-action="open-reminder"]');
+    if (bellBtn) {
+      e.stopPropagation();
+      const taskId = bellBtn.dataset.taskId;
+      const task   = Model.getTaskById(taskId);
+      if (!task) return;
+      View.showReminderModal(task, Model.getTeam(), (recipients, message) => {
+        const names = recipients.join(', ');
+        View.showToast(`Reminder sent to ${names}`);
+      });
+      return;
+    }
+
     // Open task card
     const card = e.target.closest('.card');
     if (card) {

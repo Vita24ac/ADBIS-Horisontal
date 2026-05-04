@@ -198,6 +198,7 @@ const View = (() => {
       <div class="card-footer">
         <div class="card-assignee ${assigneeClass(task.assigneeId)}">${initials}</div>
         <span class="card-due${overdueCls}">${formatDate(task.dueDate)}</span>
+        <button class="card-bell-btn" data-action="open-reminder" data-task-id="${task.id}" title="Send reminder">🔔</button>
       </div>
     `;
     return card;
@@ -475,6 +476,74 @@ const View = (() => {
     $modalWrap.innerHTML = '';
   }
 
+  // ─── Reminder Modal ────────────────────────────────────────────────────────
+  function showReminderModal(task, team, onSend) {
+    const checkboxes = team.map(m => `
+      <label class="reminder-member-item">
+        <input type="checkbox" class="reminder-checkbox" value="${m.id}" data-name="${m.name}">
+        <span class="reminder-member-avatar ${assigneeClass(m.id)}">${m.initials}</span>
+        <span class="reminder-member-name">${m.name}</span>
+      </label>
+    `).join('');
+
+    $modalWrap.innerHTML = `
+      <div class="modal">
+        <div class="modal-header">
+          <h3 class="modal-title">🔔 Send Reminder</h3>
+          <button class="modal-close-btn" data-action="reminder-close">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-field">
+            <label class="modal-label">Task</label>
+            <p class="reminder-task-name">${task.title}</p>
+          </div>
+          <div class="modal-field">
+            <label class="modal-label">Notify</label>
+            <div class="reminder-member-list">${checkboxes}</div>
+          </div>
+          <div class="modal-field">
+            <label class="modal-label">Message</label>
+            <textarea class="modal-input reminder-message" placeholder="Write your reminder message…" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-cancel" data-action="reminder-close">Cancel</button>
+          <button class="btn-confirm" data-action="reminder-send">Send Reminder</button>
+        </div>
+      </div>
+    `;
+    $modalWrap.classList.add('visible');
+
+    $modalWrap.querySelector('[data-action="reminder-send"]').addEventListener('click', () => {
+      const selected = [...$modalWrap.querySelectorAll('.reminder-checkbox:checked')].map(cb => cb.dataset.name);
+      if (selected.length === 0) {
+        $modalWrap.querySelector('.reminder-member-list').classList.add('reminder-shake');
+        return;
+      }
+      const message = $modalWrap.querySelector('.reminder-message').value.trim();
+      hideModal();
+      onSend(selected, message);
+    });
+
+    $modalWrap.querySelectorAll('[data-action="reminder-close"]').forEach(btn => {
+      btn.addEventListener('click', hideModal);
+    });
+  }
+
+  // ─── Toast ─────────────────────────────────────────────────────────────────
+  function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `<span class="toast-check">✓</span>${message}`;
+    document.body.appendChild(toast);
+    toast.offsetHeight; // force reflow
+    toast.classList.add('visible');
+    setTimeout(() => {
+      toast.classList.remove('visible');
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }
+
   return {
     renderNav,
     renderClientRibbon,
@@ -489,6 +558,8 @@ const View = (() => {
     renderInternalNoteList,
     toggleProjectSection,
     showModal,
-    hideModal
+    hideModal,
+    showReminderModal,
+    showToast
   };
 })();
