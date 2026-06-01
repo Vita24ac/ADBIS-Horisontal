@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="510" viewBox="0 0 760 510">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="black"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="760" height="510" fill="white"/>
+
+  <!-- System Boundary -->
+  <rect x="90" y="48" width="642" height="450" fill="none" stroke="black" stroke-width="1.5"/>
+  <text x="411" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold">House of Leap – Project Management System</text>
+
+  <!-- ===== ACTOR: Teammedlem ===== -->
+  <circle cx="45" cy="190" r="14" fill="none" stroke="black" stroke-width="1.5"/>
+  <line x1="45" y1="204" x2="45" y2="244" stroke="black" stroke-width="1.5"/>
+  <line x1="45" y1="220" x2="25" y2="236" stroke="black" stroke-width="1.5"/>
+  <line x1="45" y1="220" x2="65" y2="236" stroke="black" stroke-width="1.5"/>
+  <line x1="45" y1="244" x2="30" y2="268" stroke="black" stroke-width="1.5"/>
+  <line x1="45" y1="244" x2="60" y2="268" stroke="black" stroke-width="1.5"/>
+  <text x="45" y="286" text-anchor="middle" font-family="Arial, sans-serif" font-size="12">Teammedlem</text>
+
+  <!-- ===== USE CASES ===== -->
+
+  <!-- E1: Se Kanban Board -->
+  <ellipse cx="235" cy="228" rx="88" ry="30" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="235" y="224" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5">Se Kanban</text>
+  <text x="235" y="239" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5">Board</text>
+
+  <!-- E2: Filtrer efter Klient -->
+  <ellipse cx="452" cy="120" rx="90" ry="30" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="452" y="116" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5">Filtrer efter</text>
+  <text x="452" y="131" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5">Klient</text>
+
+  <!-- E3: Prioritetssortering -->
+  <ellipse cx="608" cy="195" rx="88" ry="30" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="608" y="191" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5">Prioritets-</text>
+  <text x="608" y="206" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5">sortering</text>
+
+  <!-- E4: Åbn Opgave -->
+  <ellipse cx="412" cy="325" rx="78" ry="28" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="412" y="321" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5">Åbn</text>
+  <text x="412" y="336" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5">Opgave</text>
+
+  <!-- E5: Skift Status -->
+  <ellipse cx="608" cy="380" rx="72" ry="28" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="608" y="376" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5">Skift</text>
+  <text x="608" y="391" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5">Status</text>
+
+  <!-- E6: Tilføj Kommentar -->
+  <ellipse cx="572" cy="460" rx="85" ry="28" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="572" y="456" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5">Tilføj</text>
+  <text x="572" y="471" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5">Kommentar</text>
+
+  <!-- ===== RELATIONSHIPS ===== -->
+
+  <!-- Association: Actor → Se Kanban Board (solid line) -->
+  <line x1="65" y1="224" x2="147" y2="228" stroke="black" stroke-width="1.2"/>
+
+  <!-- «uses»: Se Kanban Board → Filtrer efter Klient -->
+  <!-- dir=(217,-108), unit=(0.895,-0.445); E1 start=(314,215), E2 end=(371,133) -->
+  <line x1="314" y1="215" x2="371" y2="133"
+        stroke="black" stroke-width="1.2" stroke-dasharray="6,4"
+        marker-end="url(#arr)"/>
+  <text x="315" y="166" font-family="Arial, sans-serif" font-size="10" font-style="italic">«uses»</text>
+
+  <!-- «uses»: Se Kanban Board → Prioritetssortering -->
+  <!-- dir=(373,-33), unit=(0.996,-0.088); E1 start=(323,225), E3 end=(520,198) -->
+  <line x1="323" y1="225" x2="520" y2="198"
+        stroke="black" stroke-width="1.2" stroke-dasharray="6,4"
+        marker-end="url(#arr)"/>
+  <text x="397" y="204" font-family="Arial, sans-serif" font-size="10" font-style="italic">«uses»</text>
+
+  <!-- «extends»: Åbn Opgave → Se Kanban Board -->
+  <!-- dir=(-177,-97), unit=(-0.876,-0.480); E4 start=(344,312), E1 end=(312,242) -->
+  <line x1="344" y1="312" x2="312" y2="242"
+        stroke="black" stroke-width="1.2" stroke-dasharray="6,4"
+        marker-end="url(#arr)"/>
+  <text x="282" y="282" font-family="Arial, sans-serif" font-size="10" font-style="italic">«extends»</text>
+
+  <!-- «extends»: Skift Status → Åbn Opgave -->
+  <!-- dir=(-196,-55), unit=(-0.963,-0.271); E5 start=(539,372), E4 end=(487,333) -->
+  <line x1="539" y1="372" x2="487" y2="333"
+        stroke="black" stroke-width="1.2" stroke-dasharray="6,4"
+        marker-end="url(#arr)"/>
+  <text x="481" y="360" font-family="Arial, sans-serif" font-size="10" font-style="italic">«extends»</text>
+
+  <!-- «extends»: Tilføj Kommentar → Åbn Opgave -->
+  <!-- dir=(-160,-135), unit=(-0.765,-0.645); E6 start=(507,442), E4 end=(472,343) -->
+  <line x1="507" y1="442" x2="472" y2="343"
+        stroke="black" stroke-width="1.2" stroke-dasharray="6,4"
+        marker-end="url(#arr)"/>
+  <text x="452" y="400" font-family="Arial, sans-serif" font-size="10" font-style="italic">«extends»</text>
+
+</svg>
